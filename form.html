@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <title>HTML Form</title>
+</head>
+<body>
+
+<h2>Simple HTML form to Telegram</h2>
+
+<form onsubmit="return sendtotg();">
+  <input type="text" id="name" value="" placeholder="Name"><br>
+  <input type="email" id="email" value="" placeholder="Email"><br>
+  <textarea type="textarea" id="message" value="" placeholder="Your message"></textarea><br>
+  <input type="submit" value="Submit">
+</form> 
+
+<p>Our Telegram bot will communicate to us</p>
+
+<script>
+    function sendtotg(){
+        var nametg = document.getElementById("name").value;
+        var emailtg = document.getElementById("email").value;
+        var messagetg = document.getElementById("message").value;
+        var messagecomplete = "Form from: " + nametg + "%0A" + "User email: " + emailtg + "%0A" + "Message: " + messagetg;
+        $.ajax({ url: "https://api.telegram.org/bot<TOKEN>/sendMessage?chat_id=<YOURCHATID>&text=" + messagecomplete,
+        async : false,
+        success: function(msg){
+            alert("Thanks for contact with us " + nametg + " we'll contact with you asap!");
+           }
+        });
+    }
+</script>
+
+</body>
+</html>
